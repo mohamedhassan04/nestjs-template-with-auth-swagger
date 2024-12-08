@@ -1,73 +1,118 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
-</p>
+# NestJS Application Starter Template
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+This repository provides a robust and scalable starting point for building backend applications using **NestJS**, equipped with key features like Swagger documentation, PostgreSQL database integration, JWT-based authentication with HTTP-only cookies, and email functionality using Nodemailer.
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+## Features
 
-## Description
+- **NestJS Framework**: Scalable and maintainable backend architecture.
+- **PostgreSQL Integration**: Efficient database management with TypeORM.
+- **JWT Authentication**: Secure token-based authentication with HTTP-only cookies.
+- **Swagger Documentation**: API documentation and testing interface.
+- **Nodemailer Integration**: Email functionality for notifications and communication.
+- **Environment Configuration**: Secure and modular configuration for different environments.
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+## Prerequisites
+
+- **Node.js**: Version 16 or higher
+- **npm**: Version 8 or higher
+- **PostgreSQL**: Version 12 or higher
+- **Docker** (optional): For containerized development and deployment
 
 ## Installation
 
-```bash
-$ npm install
+1. **Clone the repository**:
+
+   ```bash
+   git clone https://github.com/your-username/nestjs-starter-template.git
+   cd nestjs-starter-template
+   ```
+
+2. **Install dependencies**:
+
+   ```bash
+   npm install
+   ```
+
+3. **Configure environment variables**:
+   Create a `.env` file in the root directory and add the following variables:
+
+   ```env
+   DATABASE_HOST=localhost
+   DATABASE_PORT=5432
+   DATABASE_USER=your_db_user
+   DATABASE_PASSWORD=your_db_password
+   DATABASE_NAME=your_db_name
+   JWT_SECRET=your_jwt_secret
+   COOKIE_SECURE=false # Set to true in production
+   SMTP_HOST=smtp.your-email-provider.com
+   SMTP_PORT=587
+   SMTP_USER=your_email@example.com
+   SMTP_PASSWORD=your_email_password
+   ```
+
+4. **Run the application**:
+
+   ```bash
+   npm run start:dev
+   ```
+
+## Usage
+
+### API Documentation
+
+Swagger documentation is available at [http://localhost:5000/docs/v1](http://localhost:5000/docs/v1) by default.
+
+### Authentication
+
+- Authentication is managed via JWT stored in HTTP-only cookies for enhanced security.
+- To log in, send a `POST` request to `/auth/login` with your credentials.
+- Use the provided cookie for subsequent authenticated requests.
+
+### Sending Emails
+
+- Use the `/email/send` endpoint (or similar as per your configuration) to trigger email sending functionality.
+- Configure SMTP settings in the `.env` file.
+
+## Project Structure
+
+```plaintext
+src/
+├── auth/               # Authentication module (JWT, Guards, etc.)
+├── common/             # Shared modules, interceptors, and utilities
+├── config/             # Database module and entities
+├── email/              # Nodemailer integration
+├── app.module.ts
+├── index.ts            # Main file for modules
+├── main.ts             # Application entry point
 ```
 
-## Running the app
+## Docker Support
 
-```bash
-# development
-$ npm run start
+The application includes a `Dockerfile` and `docker-compose.yml` for containerized development.
 
-# watch mode
-$ npm run start:dev
+1. **Build and start the containers**:
 
-# production mode
-$ npm run start:prod
-```
+   ```bash
+   docker-compose up --build
+   ```
 
-## Test
+2. The application will be available at [http://localhost:5000](http://localhost:5000).
 
-```bash
-# unit tests
-$ npm run test
+## Scripts
 
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
-```
-
-## Support
-
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
-
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+- `npm run start`: Start the application in production mode.
+- `npm run start:dev`: Start the application in development mode with hot reloading.
+- `npm run lint`: Run linting.
+- `npm run test`: Run tests.
 
 ## License
 
-Nest is [MIT licensed](LICENSE).
+This project is licensed under the [MIT License](LICENSE).
+
+## Contributing
+
+Contributions are welcome! Please fork this repository and submit a pull request.
+
+## Contact
+
+For inquiries or support, reach out at hassenmohamed.92\@gmail.com
