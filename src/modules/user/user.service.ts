@@ -48,6 +48,19 @@ export class UserService {
     });
   }
 
+  async findAll() {
+    const users = await this._userRepo.find();
+    const result = users.map((user) => {
+      const { password, ...result } = user;
+      return result;
+    });
+    return { success: result, status: HttpStatus.OK };
+  }
+
+  async deleteUser(id: string) {
+    return await this._userRepo.delete(id);
+  }
+
   async findOneUserById(id: string) {
     return await this._userRepo.findOne({
       where: { id: id },

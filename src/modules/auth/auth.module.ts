@@ -33,6 +33,8 @@ export class AuthenticationModule implements NestModule {
       .exclude(
         { path: 'auth/login', method: RequestMethod.POST },
         { path: 'auth/register', method: RequestMethod.POST },
+        { path: 'user/users', method: RequestMethod.GET },
+        { path: 'user/:id', method: RequestMethod.DELETE },
       ) // Exclude specific paths or methods
       .forRoutes('*'); // Apply to all routes
   }

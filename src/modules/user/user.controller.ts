@@ -5,6 +5,7 @@ import {
   HttpStatus,
   Param,
   UseGuards,
+  Delete,
 } from '@nestjs/common';
 import { UserService } from './user.service';
 import {
@@ -35,6 +36,40 @@ export class UserController {
   @Get('getUser')
   findOne(@Body() email: string) {
     return this.userService.findOneUser(email);
+  }
+
+  //@Method GET
+  //@desc Get one user by email
+  //@Path: /getUser
+  @ApiOperation({ summary: 'Get One User' })
+  @ApiResponse({
+    status: HttpStatus.CREATED,
+    description: 'Successful Get One User.',
+  })
+  @ApiResponse({
+    status: HttpStatus.BAD_REQUEST,
+    description: 'Error Get One User.',
+  })
+  @Get('users')
+  findAll() {
+    return this.userService.findAll();
+  }
+
+  //@Method GET
+  //@desc Get one user by email
+  //@Path: /getUser
+  @ApiOperation({ summary: 'Get One User' })
+  @ApiResponse({
+    status: HttpStatus.CREATED,
+    description: 'Successful Get One User.',
+  })
+  @ApiResponse({
+    status: HttpStatus.BAD_REQUEST,
+    description: 'Error Get One User.',
+  })
+  @Delete(':id')
+  deleteUser(@Param('id') id: string) {
+    return this.userService.deleteUser(id);
   }
 
   //@Method GET
